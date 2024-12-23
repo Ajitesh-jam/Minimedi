@@ -130,11 +130,12 @@ export default function Home() {
                 <Service />
                 <WhyChooseUs />
                 <Funfacts />
-                <Team />
-                <Video />
+                {/* <Team /> */}
+                
                 <Process />
+                <Video />
                 <Testimonial />
-                <Pricing />
+                
                 <News />
                 <Subscribe />
             </Layout>

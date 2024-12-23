@@ -45,6 +45,7 @@ export async function retrieveFile(_cid) {
 }
 
 
+
 export async function retrieveFileWithSignedURL(_cid) {
   const pinata1 = new PinataSDK({
     pinataJwt: JWT,

@@ -16,6 +16,7 @@
     "bootstrap-touchspin": "^4.7.3",
     "form-data": "^4.0.1",
     "got": "^14.4.5",
+    "http-proxy-middleware": "^3.0.3",
     "isotope-layout": "^3.0.6",
     "lightgallery": "^2.7.2",
     "next": "^15.1.2",

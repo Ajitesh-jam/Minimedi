@@ -71,7 +71,7 @@ export default function Header1({ scroll, isMobileMenu, handleMobileMenu, isSide
                   </nav>
                 </div>
                 <div className="btn-box">
-                  <Link href="/" className="theme-btn btn-one"><span>Sign Up</span></Link>
+                  <Link href="/" className="theme-btn btn-one"><span>MiniMedi</span></Link>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function Header1({ scroll, isMobileMenu, handleMobileMenu, isSide
               <ul className="menu-right-content">
 
                 <div className="btn-box">
-                  <Link href="/" className="theme-btn btn-one"><span>Sign Up</span></Link>
+                  <Link href="/" className="theme-btn btn-one"><span>MediMini</span></Link>
                 </div>
               </ul>
 

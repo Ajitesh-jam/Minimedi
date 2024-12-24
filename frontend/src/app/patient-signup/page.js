@@ -98,7 +98,7 @@ export default function Home() {
                         <div
                             className="bg-layer"
                             style={{
-                                backgroundImage: "url(https://ennoblecare.com/wp-content/uploads/2023/09/iStock-1152844782.jpg)",
+                                backgroundImage: "url(assets/images/NewLogo.png)",//"url(https://ennoblecare.com/wp-content/uploads/2023/09/iStock-1152844782.jpg)",
                                 // width: "1608px",
                                 // height: "937px",
                                 backgroundSize: "cover",

@@ -124,18 +124,19 @@ export default function Home() {
     return (
         <>
             <Layout headerStyle={1} footerStyle={1}>
-             <Banner />
+                <Banner />
                 <Feature />
-                <About />
-                <Service />
-                <WhyChooseUs />
+                <WhyChooseUs/>
                 <Funfacts />
-                {/* <Team /> */}
+                {/* <Service /> */}
+                {/* <Funfacts /> */}
+                {/* <About /> */}
                 
+                {/* <Team /> */}
                 <Process />
                 <Video />
-                <Testimonial />
-                
+                {/* <Testimonial /> */}
+                {/* <Pricing /> */}
                 <News />
                 <Subscribe />
             </Layout>

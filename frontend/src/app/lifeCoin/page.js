@@ -6,6 +6,7 @@ import Link from "next/link"
 import { getTopLifeCoinHolders } from "@/src/components/utils/lifeCoinsWeb3"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import About from "../../components/home/About"
 
 export default function Home() {
     const [topHolders, setTopHolders] = useState([])
@@ -85,7 +86,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-                <WhyChooseUs />
+                <About />
             </Layout>
         </>
     )

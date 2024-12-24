@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function Process() {
   return (
@@ -12,7 +13,7 @@ export default function Process() {
       <div className="auto-container">
         <div className="sec-title mb_50 centred">
           <span className="sub-title">Process</span>
-          <h2>How it Helps You to <br />Keep Healthy</h2>
+          <h2>How We Keep You Healthy</h2>
         </div>
         <div className="inner-container">
           <div className="arrow-shape" style={{ backgroundImage: 'url(assets/images/shape/shape-18.png)' }}></div>
@@ -21,8 +22,9 @@ export default function Process() {
               <span className="count-text">01</span>
               <figure className="image-box"><img src="assets/images/resource/process-1.jpg" alt="" /></figure>
               <div className="lower-content">
-                <h3>Get Appointment</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Get Onboarded</h3>
+                <p>Sign Up to get a Linked Wallet<br/> &nbsp; </p>
+                <Link href="/patient-signup" className="theme-btn btn-two"><span>Register</span></Link>
               </div>
             </div>
           </div>
@@ -31,8 +33,8 @@ export default function Process() {
               <span className="count-text">02</span>
               <figure className="image-box"><img src="assets/images/resource/process-2.jpg" alt="" /></figure>
               <div className="lower-content">
-                <h3>Start Check-Up</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Uploads and History</h3>
+                <p>Begin by uploading your existing medical records. Medblock will digistise them and store them securley in your wallet.</p>
               </div>
             </div>
           </div>
@@ -41,8 +43,8 @@ export default function Process() {
               <span className="count-text">03</span>
               <figure className="image-box"><img src="assets/images/resource/process-3.jpg" alt="" /></figure>
               <div className="lower-content">
-                <h3>Enjoy Healthy Life</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Begin Diagnosis</h3>
+                <p>Get started on exploring the services, choose what suits you the best. Medblock is there to serve you for your healthy future.</p>
               </div>
             </div>
           </div>

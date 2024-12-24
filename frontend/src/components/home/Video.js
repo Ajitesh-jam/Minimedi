@@ -9,7 +9,7 @@ export default function Video() {
     <>
     <section className="video-section p_relative">
       <div className="bg-layer parallax-bg" data-parallax='{"y": 100}' style={{ backgroundImage: 'url(assets/images/background/video-bg.jpg)' }}></div>
-      <figure className="image-layer"><img src="assets/images/resource/video-1.png" alt="" /></figure>
+      {/* <figure className="image-layer"><img src="assets/images/resource/video-1.jpeg" alt="" /></figure> */}
       <div className="auto-container">
         <div className="inner-box">
           <div className="shape" style={{ backgroundImage: 'url(assets/images/shape/shape-17.png)' }}></div>

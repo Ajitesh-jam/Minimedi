@@ -22,7 +22,7 @@ export default function Menu() {
                     
                 </li>
                 {/* Pages */}
-                <li className="dropdown"><Link href="/doctors">Doctor</Link>
+                <li className="dropdown"><Link href="/hospital">Hospital</Link>
                     
                 </li>
                 {/* Contact */}

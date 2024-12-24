@@ -1,13 +1,14 @@
+
+
 'use client';
 import Layout from "../../components/layout/Layout";
 import { useState } from 'react';
 import { getAccounts } from "../../components/utils/web3.js";
-import usePatients from "../../components/hooks/patient.zustand.js";
+import useStaffs from "../../components/hooks/staff.zustand.js";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 
-import tryimg from "../../../public/assets/images/NewLogo.png";
 export default function Home() {
 
     const [isActive, setIsActive] = useState({ status: false, key: 1 });
@@ -21,11 +22,13 @@ export default function Home() {
         password: "",
         confirmPassword: "",
         image: "",
+        staffId: "",
+        post: "",
     });
     const [account, setAccount] = useState(null);
 
 
-    const patients = usePatients((state) => state.setNewPatient);
+    const Staffs = useStaffs((state) => state.setNewStaff);
     const router = useRouter();
 
     const handleToggle = (key) => {
@@ -75,23 +78,23 @@ export default function Home() {
         }
         const hashedPassword = await bcrypt.hash(formData.password, 10);
         formData.password = hashedPassword;
-        const patientData = {
+        const StaffData = {
             ...formData,
             publicAddress: account
         };
-        console.log("Submitting form with data:", patientData);
+        console.log("Submitting form with data:", StaffData);
 
         // API call or Zustand action
-        axios.post(`http://localhost:8000/createRecord/${account}`, patientData);
+        axios.post(`http://localhost:8000/staff/createRecord/${account}`, StaffData);
 
 
-        patients(patientData);
-        router.push("/patient");
+        Staffs(StaffData);
+        //router.push("/staff");
     };
 
     return (
         <>
-            <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="Patient Signup">
+            <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="Staff Signup">
                 {/* Appointments-section */}
                 <section className="appointment-section sec-pad-2">
                     <div className="outer-container p_relative">
@@ -104,11 +107,7 @@ export default function Home() {
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                             }}
-                            
-                        >
-
-                        </div>
-                       
+                        ></div>
                         <div className="auto-container">
                             <div className="row clearfix">
                                 <div className="col-lg-7 col-md-12 col-sm-12 form-column">
@@ -177,7 +176,6 @@ export default function Home() {
                                                     <input
                                                         type="radio"
                                                         name="gender"
-                                                        
                                                         value="male"
                                                         checked={formData.gender === "male"}
                                                         onChange={handleInputChange}
@@ -191,6 +189,26 @@ export default function Home() {
                                                         onChange={handleInputChange}
                                                     /> Female
 
+                                                </div>
+                                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                                    <input
+                                                        type="text"
+                                                        name="staffId"
+                                                        placeholder="Staff ID Number"
+                                                        value={formData.staffId}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                                    <input
+                                                        type="text"
+                                                        name="post"
+                                                        placeholder="Post"
+                                                        value={formData.post}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
                                                 </div>
                                                 <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                                                     <input
@@ -240,3 +258,183 @@ export default function Home() {
     );
 }
 
+// 'use client';
+// import Layout from "../../components/layout/Layout";
+// import { useState } from 'react';
+// import { getAccounts } from "../../components/utils/web3.js";
+
+// import { useRouter } from "next/navigation";
+// import axios from "axios";
+// import bcrypt from "bcryptjs";
+
+
+
+// export default function Home() {
+//     const [isActive, setIsActive] = useState({ status: false, key: 1 });
+//     const [formData, setFormData] = useState({
+//         name: "",
+//         phone: "",
+//         email: "",
+//         DOB: "",
+//         aadhar: "",
+//         gender: "",
+//         password: "",
+//         confirmPassword: "",
+//         image: "",
+//         staffId: "",
+//         post: "",
+//     });
+//     const [account, setAccount] = useState(null);
+
+//     const addStaff = useStaffs((state) => state.set);
+//     const router = useRouter();
+
+//     const handleInputChange = (e) => {
+//         const { name, value } = e.target;
+//         setFormData((prev) => ({
+//             ...prev,
+//             [name]: value,
+//         }));
+//     };
+
+//     const connectWallet = async () => {
+//         try {
+//             const accounts = await getAccounts();
+//             setAccount(accounts[0]);
+//             console.log("Connected account:", accounts[0]);
+//         } catch (error) {
+//             console.error("Error connecting wallet:", error);
+//         }
+//     };
+
+//     const submit = async (e) => {
+//         e.preventDefault();
+
+//         if (!account) {
+//             alert("Please connect your wallet first.");
+//             return;
+//         }
+//         if (formData.password !== formData.confirmPassword) {
+//             alert("Passwords do not match");
+//             return;
+//         }
+
+//         try {
+//             const hashedPassword = await bcrypt.hash(formData.password, 10);
+//             const staffData = {
+//                 ...formData,
+//                 password: hashedPassword,
+//                 publicAddress: account,
+//             };
+
+//             // Call API to create record
+//             const response = await axios.post(`http://localhost:8000/staff/createRecord/${account}`, staffData);
+
+//             if (response.status === 200) {
+//                 alert(response.data.message);
+//                 addStaff(staffData); // Update Zustand state
+//                 router.push("/staff");
+//             } else {
+//                 alert("Failed to create staff record.");
+//             }
+//         } catch (error) {
+//             console.error("Error creating staff record:", error);
+//             alert("Error: Unable to create staff record.");
+//         }
+//     };
+
+//     return (
+//         <>
+//             <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="Staff Signup">
+//                 <section className="appointment-section sec-pad-2">
+//                     <div className="outer-container p_relative">
+//                         <div
+//                             className="bg-layer"
+//                             style={{
+//                                 backgroundImage: "url(https://ennoblecare.com/wp-content/uploads/2023/09/iStock-1152844782.jpg)",
+//                                 backgroundSize: "cover",
+//                                 backgroundPosition: "center",
+//                             }}
+//                         ></div>
+//                         <div className="auto-container">
+//                             <div className="row clearfix">
+//                                 <div className="col-lg-7 col-md-12 col-sm-12 form-column">
+//                                     <div className="form-inner">
+//                                         <form className="default-form" onSubmit={submit}>
+//                                             <div className="row clearfix">
+//                                                 {/* Form fields */}
+//                                                 <div className="col-lg-12 form-group">
+//                                                     <input
+//                                                         type="text"
+//                                                         name="name"
+//                                                         placeholder="Name"
+//                                                         value={formData.name}
+//                                                         onChange={handleInputChange}
+//                                                         required
+//                                                     />
+//                                                 </div>
+//                                                 <div className="col-lg-6 form-group">
+//                                                     <input
+//                                                         type="text"
+//                                                         name="phone"
+//                                                         placeholder="Phone"
+//                                                         value={formData.phone}
+//                                                         onChange={handleInputChange}
+//                                                         required
+//                                                     />
+//                                                 </div>
+//                                                 <div className="col-lg-6 form-group">
+//                                                     <input
+//                                                         type="email"
+//                                                         name="email"
+//                                                         placeholder="Email"
+//                                                         value={formData.email}
+//                                                         onChange={handleInputChange}
+//                                                         required
+//                                                     />
+//                                                 </div>
+//                                                 {/* Additional fields */}
+//                                                 <div className="col-lg-6 form-group">
+//                                                     <input
+//                                                         type="text"
+//                                                         name="staffId"
+//                                                         placeholder="Staff ID"
+//                                                         value={formData.staffId}
+//                                                         onChange={handleInputChange}
+//                                                     />
+//                                                 </div>
+//                                                 <div className="col-lg-6 form-group">
+//                                                     <input
+//                                                         type="text"
+//                                                         name="post"
+//                                                         placeholder="Post"
+//                                                         value={formData.post}
+//                                                         onChange={handleInputChange}
+//                                                     />
+//                                                 </div>
+//                                                 <div className="col-lg-12 form-group">
+//                                                     <button
+//                                                         type="button"
+//                                                         className="theme-btn btn-one"
+//                                                         onClick={connectWallet}
+//                                                     >
+//                                                         Connect Wallet
+//                                                     </button>
+//                                                 </div>
+//                                                 <div className="col-lg-12 form-group message-btn">
+//                                                     <button type="submit" className="theme-btn btn-one">
+//                                                         Sign Up
+//                                                     </button>
+//                                                 </div>
+//                                             </div>
+//                                         </form>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </section>
+//             </Layout>
+//         </>
+//     );
+// }

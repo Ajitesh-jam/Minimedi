@@ -1,7 +1,7 @@
 "use client"
 import Layout from "../../components/layout/Layout"
 import Link from "next/link"
-import usePatients from "../../components/hooks/patient.zustand"
+import useStaffs from "../../components/hooks/staff.zustand"
 import axios from "axios";
 import { useState } from "react";
 
@@ -10,7 +10,8 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-    const patients = usePatients((state) => state.setNewPatient);
+    //const patients = useStaffs((state) => state.setNewPatient);
+    const staffs = useStaffs((state) => state.setNewStaff);
     //const navigate = useNavigate(); // Use navigate instead of router
     const [aadhar,setAdhar] = useState(); 
     const [password,setPassword] = useState(); 
@@ -22,14 +23,15 @@ export default function Home() {
         console.log("Login called");
         try {
             
-            const response = await axios.get(`http://localhost:8000/getRecord/${aadhar}/${password}`);
-            if (response.status === 200) {
-                patients(response.data); // Update patient data in Zustand
-                console.log("Successfully logged in as : ",response.data);
+            //const response = await axios.get(`http://localhost:8000/getRecord/${aadhar}/${password}`);
+            //if (response.status === 200) {
+                //patients(response.data); // Update patient data in Zustand
+                console.log("Successfully logged in as Doctor: ");
 
-                //naviagte to /patinet
-                router.push("/patient");
-            }
+                //naviagte to /Doctor
+                router.push("/doctor");
+
+            //}
         } catch (error) {
             //Handle specific error cases
             if (error.response) {
@@ -52,9 +54,10 @@ export default function Home() {
         try {
             
             const response = await axios.get(`http://localhost:8000/staff/getRecord/${aadhar}/${password}`);
+            
+            console.log("Successfully logged in as : ",response.data);
             if (response.status === 200) {
-                patients(response.data); // Update patient data in Zustand
-                console.log("Successfully logged in as : ",response.data);
+                staffs(response.data); // Update patient data in Zustand
 
                 //naviagte to /patinet
                 router.push("/staff");
@@ -102,7 +105,7 @@ export default function Home() {
                                                     
                                                 </div>
                                                 <button type="submit" className="theme-btn btn-one" onClick={login}><span>Login </span></button>
-                                                Don't have an account? <Link href="/patient-signup">Register</Link>
+
                                             </>
 
                                             <div className="sec-title mb_50">
@@ -112,7 +115,7 @@ export default function Home() {
                                             <>
                                                 <div className="row clearfix">
                                                     <div className="col-lg-6 col-md-6 col-sm-12 form-group">
-                                                        <input type="text" name="fname" placeholder="Adhar" onChange={(e) => setAdhar(e.target.value)} required />
+                                                        <input type="text" name="fname" placeholder="publicAddress" onChange={(e) => setAdhar(e.target.value)} required />
                                                     </div>
                                                     
                                                     <div className="col-lg-6 col-md-6 col-sm-12 form-group">
@@ -120,7 +123,7 @@ export default function Home() {
                                                     </div>
                                                     
                                                 </div>
-                                                <button type="submit" className="theme-btn btn-one" onClick={login}><span>Login </span></button>
+                                                <button type="submit" className="theme-btn btn-one" onClick={loginStaff}><span>Login </span></button>
                                                 Don't have an account? <Link href="/staff-sign">Register</Link>
                                             </>
 

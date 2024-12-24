@@ -24,6 +24,14 @@ export default function Home() {
         image: "",
         staffId: "",
         post: "",
+
+
+
+        publicAddress:"",
+
+
+
+
     });
     const [account, setAccount] = useState(null);
 
@@ -67,10 +75,10 @@ export default function Home() {
     const submit = async (e) => {
         e.preventDefault();
 
-        if (!account) {
-            alert("Please connect your wallet first.");
-            return;
-        }
+        // if (!account) {
+        //     alert("Please connect your wallet first.");
+        //     return;
+        // }
         //encrypt the password
         if (formData.password !== formData.confirmPassword) {
             alert("Passwords do not match");
@@ -80,16 +88,17 @@ export default function Home() {
         formData.password = hashedPassword;
         const StaffData = {
             ...formData,
-            publicAddress: account
+            publicAddress:account
+            
         };
         console.log("Submitting form with data:", StaffData);
 
         // API call or Zustand action
-        axios.post(`http://localhost:8000/staff/createRecord/${account}`, StaffData);
+        axios.post(`http://localhost:8000/staff/createRecord/${formData.publicAddress}`, StaffData);
 
 
         Staffs(StaffData);
-        //router.push("/staff");
+        router.push("/staff");
     };
 
     return (

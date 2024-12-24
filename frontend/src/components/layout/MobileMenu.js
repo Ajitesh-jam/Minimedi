@@ -103,7 +103,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
           <div className="contact-info">
           <h4>Contact Info</h4>
           <ul>
-            <li>Chicago 12, Melborne City, USA</li>
+            <li>IIT Kharagpur</li>
             <li><Link href="tel:+8801682648101">+88 01682648101</Link></li>
             <li><Link href="mailto:info@example.com">info@example.com</Link></li>
           </ul>

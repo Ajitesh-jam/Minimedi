@@ -441,7 +441,7 @@ app.post('/staff/createRecord/:publicAddress', async (req, res) => {
     //console.log("Arguments: " + JSON.stringify(req.body));
    try {
     // Use setDoc with the Aadhar number as the document ID
-    await setDoc(doc(firestore, "staff", aadhar), {
+    await setDoc(doc(firestore, "staff", publicAddress), {
       publicAddress: publicAddress,
       name:  name,
       phone: phone,
@@ -462,14 +462,14 @@ app.post('/staff/createRecord/:publicAddress', async (req, res) => {
 });
 
 // API to get a document by Aadhar (which is now the document ID)
-app.get('/staff/getRecord/:aadhar/:password', async (req, res) => {
-  const { aadhar } = req.params;
+app.get('/staff/getRecord/:publicAddress/:password', async (req, res) => {
+  const { publicAddress } = req.params;
   const { password } = req.params; // Password provided in the request
 
-  console.log("Getting ",aadhar, " records from ",password);
+  //console.log("Getting ",aadhar, " records from ",password);
 
   try {
-    const docRef = doc(firestore, "staff", aadhar);
+    const docRef = doc(firestore, "staff", publicAddress);
     const snap = await getDoc(docRef);
 
     if (snap.exists()) {
@@ -495,7 +495,61 @@ app.get('/staff/getRecord/:aadhar/:password', async (req, res) => {
 });
 
 
+// app.get('/staff/:publicAddress',async (req, res) => {
 
+//   const { publicAddress } = req.params;
+//   console.log("Getting ",publicAddress);
+//   try {
+//       const docRef = doc(firestore, "staff", publicAddress);
+//       const snap = await getDoc(docRef);
+//       if (snap.exists()) {
+//         const data = snap.data();
+//         res.status(200).send(data);
+//         } 
+//       else {
+//         res.status(404).send({ error: "Record not found" });
+//         }
+//     } 
+//     catch (error) {
+//        res.status(500).send({ error: "Error fetching Record: " + error });
+//     }
+//  });
+ 
+ //make a api function that on giving 3 public address as input ,will return an array from the firebase staff database
+ // their public address, img url , email
+ app.get('/staff/:publicAddress1/:publicAddress2/:publicAddress3', async (req, res) => {
+     const { publicAddress1, publicAddress2, publicAddress3 } = req.params;
+ 
+     try {
+         // Create an array of public addresses to fetch data for
+         const publicAddresses = [publicAddress1, publicAddress2, publicAddress3];
+         
+         
+         // Fetch details for each public address from Firestore
+         const fetchDetails = async (address) => {
+             const docRef = doc(firestore, "staff", address);
+             const snap = await getDoc(docRef);
+
+             
+             if (snap.exists()) {
+                 return { publicAddress: address, ...snap.data() };
+             } else {
+                 return { publicAddress: address, error: "Record not found" };
+             }
+         };
+ 
+         // Execute fetch for all addresses concurrently
+         const results = await Promise.all(publicAddresses.map(fetchDetails));
+ 
+         // Send the response
+         res.status(200).send({ data: results });
+     } catch (error) {
+         res.status(500).send({ error: "Error fetching records: " + error.message });
+     }
+ });
+ 
+
+  
 
 
 
